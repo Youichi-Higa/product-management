@@ -1,0 +1,47 @@
+header {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;
+  text-align: center;
+}
+p {
+  margin: 10px 1% 5px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+textarea {
+  height: 100px;
+  margin: 1%;
+  width: 95%;
+  font-size: 100%;
+  box-shadow: 3px 3px 3px 3px #555;
+}
+
+ul {
+  padding: 0;
+  border-top: 1px solid #000000;
+  display: table; /* 定義 */
+  table-layout: fixed;
+  width: 100%;
+}
+li {
+  list-style-type: none;
+  border: 1px solid #666;
+  background-color: #fff;
+  display: table-cell; /* 定義 */
+  cursor: pointer;
+  text-align: center;
+  font-size: 30px;
+}
+li:hover {
+  background: #0066cc;
+  color: #fff;
+}
+
+/*ーーーーーーーーーーー*/
+/*footer
+/*ーーーーーーーーーーー*/
+
+footer {
+  padding: 10px 0;
+}

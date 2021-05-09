@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>課題制作管理</title>
+  </head>
+  <body>
+    <header>
+      <h1>課題制作管理</h1>
+    </header>
+
+    <main>
+      <p>１．絶対ないといけないもの</p>
+      <textarea id="must"></textarea>
+
+      <p>２．あったらめっちゃいいもの</p>
+      <textarea id="grate"></textarea>
+
+      <p>３．あったらいいけど、なくてもいいもの</p>
+      <textarea id="better"></textarea>
+
+      <ul>
+        <li id="save">保存</li>
+        <li id="clear">削除</li>
+      </ul>
+
+      <footer>
+        <small>© 2021 Youichi Higa</small>
+      </footer>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+      // 保存クリックイベント
+      $("#save").on("click", function () {
+        const m_date = $("#must").val();
+        const g_date = $("#grate").val();
+        const b_date = $("#better").val();
+
+        const all_date = {
+          must: m_date,
+          grate: g_date,
+          better: b_date,
+        };
+
+        const jsonDate = JSON.stringify(all_date);
+        // console.log(all_date);
+
+        localStorage.setItem("save_date", jsonDate);
+      });
+
+      // 削除クリックイベント
+      $("#clear").on("click", function () {
+        localStorage.removeItem("save_date");
+        $("#must").val("");
+        $("#grate").val("");
+        $("#better").val("");
+      });
+
+      //ページ読み込み：保存データ取得表示
+      if (localStorage.getItem("save_date")) {
+        const jsonDate = localStorage.getItem("save_date");
+        const all_date = JSON.parse(jsonDate);
+        $("#must").val(all_date.must);
+        $("#grate").val(all_date.grate);
+        $("#better").val(all_date.better);
+      }
+    </script>
+  </body>
+</html>
