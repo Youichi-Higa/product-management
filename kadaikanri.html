@@ -26,6 +26,7 @@
         <li id="save">保存</li>
         <li id="clear">削除</li>
       </ul>
+      <div id="saveResult"></div>
 
       <footer>
         <small>© 2021 Youichi Higa</small>
@@ -35,6 +36,8 @@
     <script>
       // 保存クリックイベント
       $("#save").on("click", function () {
+        let checkSaveFlg = window.confirm("保存しますか？");
+
         const m_date = $("#must").val();
         const g_date = $("#grate").val();
         const b_date = $("#better").val();
@@ -45,18 +48,28 @@
           better: b_date,
         };
 
-        const jsonDate = JSON.stringify(all_date);
-        // console.log(all_date);
-
-        localStorage.setItem("save_date", jsonDate);
+        if (checkSaveFlg) {
+          const jsonDate = JSON.stringify(all_date);
+          localStorage.setItem("save_date", jsonDate);
+          alert("保存を実行しました。");
+        } else {
+          alert("保存をキャンセルしました。");
+        }
       });
 
       // 削除クリックイベント
       $("#clear").on("click", function () {
-        localStorage.removeItem("save_date");
-        $("#must").val("");
-        $("#grate").val("");
-        $("#better").val("");
+        let checkSaveFlg = window.confirm("削除しますか？");
+
+        if (checkSaveFlg) {
+          localStorage.removeItem("save_date");
+          $("#must").val("");
+          $("#grate").val("");
+          $("#better").val("");
+          alert("削除を実行しました。");
+        } else {
+          alert("削除をキャンセルしました。");
+        }
       });
 
       //ページ読み込み：保存データ取得表示
