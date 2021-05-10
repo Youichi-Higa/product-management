@@ -9,12 +9,10 @@ p {
   font-weight: bold;
 }
 
-textarea {
-  height: 100px;
-  margin: 1%;
+input {
+  margin: 0 1% 5px;
   width: 95%;
   font-size: 100%;
-  box-shadow: 3px 3px 3px 3px #555;
 }
 
 ul {
