@@ -1,38 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>課題制作管理</title>
+    <title>課題制作　進捗管理</title>
   </head>
   <body>
     <header>
-      <h1>課題制作管理</h1>
+      <h1>課題制作　進捗管理</h1>
     </header>
 
     <main>
       <p>１．絶対ないといけないもの</p>
-      <input id="must_0"></input>
-      <input id="must_1"></input>
-      <input id="must_2"></input>
-      <input id="must_3"></input>
-      <input id="must_4"></input>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"　value="1">
+        <input id="must_0" class="input_text"></input>
+      </div>
+            <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="2">
+      <input id="must_1" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="3">
+      <input id="must_2" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="4">
+      <input id="must_3" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);"class="checkbox" value="5">
+      <input id="must_4" class="input_text"></input>
+      </div>
+
 
       <p>２．あったらめっちゃいいもの</p>
-      <input id="great_0"></input>
-      <input id="great_1"></input>
-      <input id="great_2"></input>
-      <input id="great_3"></input>
-      <input id="great_4"></input>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="6">
+      <input id="great_0" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="7">
+      <input id="great_1" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="8">
+      <input id="great_2" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="9">
+      <input id="great_3" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox" value="10">
+      <input id="great_4" class="input_text"></input>
+      </div>
+
+
+
 
       <p>３．あったらいいけど、なくてもいいもの</p>
-      <input id="better_0"></input>
-      <input id="better_1"></input>
-      <input id="better_2"></input>
-      <input id="better_3"></input>
-      <input id="better_4"></input>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="11">
+      <input id="better_0" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="12">
+      <input id="better_1" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="13">
+      <input id="better_2" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="14">
+      <input id="better_3" class="input_text"></input>
+      </div>
+      <div class="wrapper">
+        <input type="checkbox" style="transform:scale(1.5);" class="checkbox"value="15">
+      <input id="better_4" class="input_text"></input>
+      </div>
 
       <ul>
         <li id="save">保存</li>
@@ -40,9 +89,6 @@
       </ul>
       <div id="saveResult"></div>
 
-      <footer>
-        <small>© 2021 Youichi Higa</small>
-      </footer>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script>
@@ -50,6 +96,7 @@
       $("#save").on("click", function () {
         let checkSaveFlg = window.confirm("保存しますか？");
 
+        // テキストの取得
         const must_0 = $("#must_0").val();
         const must_1 = $("#must_1").val();
         const must_2 = $("#must_2").val();
@@ -74,12 +121,20 @@
           [better_0,better_1,better_2,better_3,better_4]
         ]
 
+        // チェックボックスの取得
+        const checkbox = document.querySelectorAll('[type="checkbox"]')
 
         if (checkSaveFlg) {
           const jsonDate = JSON.stringify(date);
           localStorage.setItem("mgb", jsonDate);
           console.log(date)
+
           alert("保存を実行しました。");
+
+          for(let item of checkbox){
+            const stname = "checkbox" + item.value
+            localStorage.setItem(stname,item.checked)
+          }
         } else {
           alert("保存をキャンセルしました。");
         }
@@ -116,7 +171,7 @@
       if (localStorage.getItem("mgb")) {
         const jsonDate = localStorage.getItem("mgb");
         const date = JSON.parse(jsonDate);
-        console.log(date)
+        // console.log(date)
         
         $("#must_0").val(date[0][0]);
         $("#must_1").val(date[0][1]);
@@ -135,10 +190,17 @@
         $("#better_2").val(date[2][2]);
         $("#better_3").val(date[2][3]);
         $("#better_4").val(date[2][4]);
+      };
 
-        // $("#grate").val(all_date.grate);
-        // $("#better").val(all_date.better);
+      if(localStorage.getItem("checkbox")){
+        for(let item of checkbox){
+            const stname = "checkbox" + item.value
+            let bool = localStorage.getItem(stname)
+            if(bool == "false") bool = false // 文字列の"false"をfalseに直す
+            item.checked = bool // checkedに文字列が渡されるとチェックマークが付く
+          }
       }
+
     </script>
   </body>
 </html>
